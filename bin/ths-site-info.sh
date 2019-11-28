@@ -5,11 +5,11 @@ THS_PATH="/usr/local/thscripts"
 . ${THS_PATH}/etc/global.conf
 . ${THS_PATH}/etc/functions.sh
 
-if [[ -z $1 ]]
-    then
-        echo "Set the domain name as an argument"
-        exit 0
-fi
+#if [[ -z $1 ]]
+#    then
+#        echo "Set the domain name as an argument"
+#        exit 0
+#fi
 
 #domain_fi=$1
 
