@@ -13,9 +13,9 @@ THS_PATH="/usr/local/thscripts"
 
 #domain_fi=$1
 
-nginx_conf_paths /etc/nginx/nginx.conf
+#nginx_conf_paths /etc/nginx/nginx.conf
 
-echo ${CONF_LIST}
+echo `nginx_conf_paths /etc/nginx/nginx.conf`
 
 #for n in ${CONF_LIST}
 #	do
