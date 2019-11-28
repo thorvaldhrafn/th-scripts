@@ -13,7 +13,7 @@ fi
 
 SERVER_IP=`get_publ_ip`
 
-nginx_conf_paths /etc/nginx/nginx.conf
+CONF_LIST=`nginx_conf_paths /etc/nginx/nginx.conf`
 
 for n in ${CONF_LIST}
 	do
