@@ -38,4 +38,6 @@ for i in ${includes}
 done
 }
 
+__nginx_conf_paths /etc/nginx/nginx.conf
+
 echo ${CONF_LIST}
