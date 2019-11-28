@@ -1,0 +1,11 @@
+[Unit]
+Description=thscripts web api
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python /usr/local/thscripts/web/api/api.py 127.0.0.1 8060 &> /var/log/th-api.log
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
