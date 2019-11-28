@@ -17,6 +17,14 @@ if [[ -e /var/lock/monit-php-fpm.lock ]]
         echo $$ > /var/lock/monit-php-fpm.lock
 fi
 
+if [[ -n ${1} ]]
+    then
+        CHECK_URL=${1}
+    else
+        echo "You must set url for monitoring"
+        exit 1
+fi
+
 http_code=`curl -I -s -S --connect-timeout 40 ${CHECK_URL} | grep "HTTP/" | awk '{ print $2 }' | cut -c -1`
 counter=1
 date=`date '+%F-%H:%M'`
