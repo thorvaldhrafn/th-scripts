@@ -1,18 +1,16 @@
 #!/usr/bin/env bash
 
-nginx_conf_paths() {
+__nginx_conf_paths() {
 chck_path="$1"
-includes=`cat ${chck_path} | egrep -r "(\s*|\t*)include.*" | awk '{ print $2 }' | awk -F";" '{ print $1 }'`
+includes=`cat ${chck_path} | egrep "(\s*|\t*)include.*" | awk '{ print $2 }' | sed -r 's/;$//'`
 for i in ${includes}
     do
         dname=`dirname ${i} | head -n1`
         if [[ "${dname}" = "." ]]
             then
-                dname="/etc/nginx"
-                fname_tmp=${i}
-            else
-                fname_tmp=`echo ${i} | awk -F"${dname}/" '{ print $2 }'`
+                dname=`dirname ${chck_path}`
         fi
+        fname_tmp=`basename ${i}`
         confs=`find ${dname} -type f -name "$fname_tmp" | xargs`
         check=`echo "$confs" | wc -w`
         if [[ ${check} -eq 1 ]]
@@ -20,7 +18,7 @@ for i in ${includes}
                 CONF_LIST="$CONF_LIST $confs"
                 fname=`basename ${i}`
                 full_fname="${dname}/$fname"
-                cat ${full_fname} | egrep -v "[^t]#|^$" | grep include > /dev/null
+                cat ${full_fname} | egrep "(\s*|\t*)include.*" > /dev/null
                 if [[ $? -eq 0 ]]
                     then
                         nginx_conf_paths ${full_fname}
@@ -38,6 +36,11 @@ for i in ${includes}
                     done
         fi
 done
+}
+
+nginx_conf_paths() {
+__nginx_conf_paths ${1}
+echo ${CONF_LIST}
 }
 
 vesta_usr_list() {
