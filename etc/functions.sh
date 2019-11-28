@@ -2,7 +2,7 @@
 
 nginx_conf_paths() {
 chck_path="$1"
-includes=`cat ${chck_path} | egrep -v "[^t]#|^$" | grep include | awk '{ print $2 }' | awk -F";" '{ print $1 }'`
+includes=`cat ${chck_path} | egrep -r "(\s*|\t*)include.*" | awk '{ print $2 }' | awk -F";" '{ print $1 }'`
 for i in ${includes}
     do
         dname=`dirname ${i} | head -n1`
