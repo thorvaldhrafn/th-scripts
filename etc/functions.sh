@@ -21,7 +21,7 @@ for i in ${includes}
                 cat ${full_fname} | egrep "(\s*|\t*)include.*" > /dev/null
                 if [[ $? -eq 0 ]]
                     then
-                        nginx_conf_paths ${full_fname}
+                        __nginx_conf_paths ${full_fname}
                 fi
             else
                 for j in ${confs}
@@ -31,7 +31,7 @@ for i in ${includes}
                         full_fname="${dname}/$fname"
                         if [[ $? -eq 0 ]]
                             then
-                                nginx_conf_paths ${full_fname}
+                                __nginx_conf_paths ${full_fname}
                         fi
                     done
         fi
