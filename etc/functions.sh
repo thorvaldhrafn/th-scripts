@@ -40,7 +40,7 @@ done
 
 nginx_conf_paths() {
 __nginx_conf_paths ${1}
-echo ${CONF_LIST}
+for i in ${CONF_LIST}; do echo ${i}; done | sort -u | xargs
 }
 
 vesta_usr_list() {
