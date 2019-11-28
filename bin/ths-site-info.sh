@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-THS_PATH="/usr/local/thscripts"
-
+#THS_PATH="/usr/local/thscripts"
+THS_PATH="/root/th-scripts"
+#
 . ${THS_PATH}/etc/global.conf
 . ${THS_PATH}/etc/functions.sh
 
