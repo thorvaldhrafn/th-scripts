@@ -45,10 +45,6 @@
       git:
         repo: https://github.com/thorvaldhrafn/th-scripts
         dest: /root/thscripts-temp/
-    - name: Make install.sh executable
-      file:
-        path: /root/thscripts-temp/install.sh
-        mode: 0700
     - name: Install all
       shell: bash install.sh
       args:
