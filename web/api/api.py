@@ -33,6 +33,8 @@ class RestHTTPRequestHandler(BaseHTTPRequestHandler):
             if k == "domain_list":
                 type_acc = form.getvalue("domain_list")
                 self.wfile.write(json.dumps({'data': result_list(type_acc)}))
+            if k == "check":
+                self.wfile.write(json.dumps({'data': "check_answ"}))
         return
 
 
