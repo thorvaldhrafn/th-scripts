@@ -11,7 +11,7 @@ cd th-scripts
 
 bash install.sh
 
-**For Deb/Ubuntu**
+**For Debian/Ubuntu**
 
 apt update && apt -y install python python-pip python-virtualenv git rsync
 
@@ -20,3 +20,7 @@ git clone https://github.com/thorvaldhrafn/th-scripts.git
 cd th-scripts
 
 bash install.sh
+
+**For Ansible**
+
+If you use Ansible, you can install scripts with playbook th-scripts-install.yml
