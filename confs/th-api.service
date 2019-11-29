@@ -7,10 +7,10 @@ Type=simple
 User=thscripts
 Group=thscripts
 WorkingDirectory=/usr/local/thscripts/web/api/
-VIRTUAL_ENV=/usr/local/thscripts/.venv/
+Environment=VIRTUAL_ENV=/usr/local/thscripts/.venv/
 Environment=PATH=$VIRTUAL_ENV/bin:$PATH
 EnvironmentFile=/usr/local/thscripts/etc/th-api.conf
-ExecStart=/usr/local/thscripts/venv/python api.py $THAPI_HOST $THAPI_PORT &> /var/log/th-api.log
+ExecStart=/usr/local/thscripts/.venv/bin/python api.py $THAPI_HOST $THAPI_PORT &> $THAPI_LOGS
 Restart=always
 
 [Install]
