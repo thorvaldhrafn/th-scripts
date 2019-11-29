@@ -22,5 +22,5 @@ rm /usr/local/thscripts/requirements.txt
 
 systemctl daemon-reload
 systemctl enable th-api.service
-systemctl start th-api.service
+systemctl restart th-api.service
 
