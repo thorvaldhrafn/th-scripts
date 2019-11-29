@@ -2,9 +2,13 @@
 
 mkdir /usr/local/thscripts/
 useradd -s /bin/bash -d /usr/local/thscripts/ -m thscripts
-mkdir /usr/local/thscripts/bin && rsync -aq bin/ /usr/local/thscripts/bin/
-mkdir /usr/local/thscripts/etc && rsync -aq etc/ /usr/local/thscripts/etc/
-mkdir /usr/local/thscripts/web && rsync -aq web/ /usr/local/thscripts/web/
+
+mkdir /usr/local/thscripts/bin
+rsync -aq bin/ /usr/local/thscripts/bin/
+mkdir /usr/local/thscripts/etc
+rsync -aq etc/ /usr/local/thscripts/etc/
+mkdir /usr/local/thscripts/web
+rsync -aq web/ /usr/local/thscripts/web/
 chown -R thscripts:thscripts /usr/local/thscripts/
 
 if [[ -d /etc/nginx/ ]]
@@ -26,3 +30,7 @@ systemctl daemon-reload
 systemctl enable th-api.service
 systemctl restart th-api.service
 
+if [[ -d /etc/nginx/ ]]
+then
+    systemctl reload nginx
+fi
