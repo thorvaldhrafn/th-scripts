@@ -4,7 +4,13 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/python /usr/local/thscripts/web/api/api.py 127.0.0.1 8060 &> /var/log/th-api.log
+User=thscripts
+Group=thscripts
+WorkingDirectory=/usr/local/thscripts/web/api/
+VIRTUAL_ENV=/usr/local/thscripts/.venv/
+Environment=PATH=$VIRTUAL_ENV/bin:$PATH
+EnvironmentFile=/usr/local/thscripts/etc/th-api.conf
+ExecStart=/usr/local/thscripts/venv/python api.py $THAPI_HOST $THAPI_PORT &> /var/log/th-api.log
 Restart=always
 
 [Install]
