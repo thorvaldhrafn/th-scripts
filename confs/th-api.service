@@ -4,8 +4,6 @@ After=network.target
 
 [Service]
 Type=simple
-User=thscripts
-Group=thscripts
 WorkingDirectory=/usr/local/thscripts/web/api/
 Environment=VIRTUAL_ENV=/usr/local/thscripts/.venv/
 Environment=PATH=$VIRTUAL_ENV/bin:$PATH
