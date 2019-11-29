@@ -14,9 +14,8 @@ fi
 
 cp confs/th-api.service /usr/lib/systemd/system/
 
-cd /usr/local/thscripts/
-su - thscripts -c "virtualenv --no-site-packages .venv/"
-su - thscripts -c "source .venv/bin/activate"
+su - thscripts -c "virtualenv --no-site-packages /usr/local/thscripts/.venv/"
+su - thscripts -c "source /usr/local/thscripts/.venv/bin/activate"
 su - thscripts -c "pip install -r requirements.txt"
 
 systemctl daemon-reload
