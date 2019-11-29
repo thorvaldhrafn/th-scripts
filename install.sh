@@ -18,3 +18,7 @@ su - thscripts -c "source .venv/bin/activate"
 su - thscripts -c "pip install -r requirements.txt"
 
 cp confs/th-api.service /usr/lib/systemd/system/
+systemctl daemon-reload
+systemctl enable th-api.service
+systemctl start th-api.service
+
