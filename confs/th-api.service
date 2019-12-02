@@ -6,7 +6,7 @@ After=network.target
 Type=simple
 WorkingDirectory=/usr/local/thscripts/web/api/
 Environment="VIRTUAL_ENV=VIRT_ENV"
-Environment="PATH=VIRT_ENV/bin:SYS_PATH"
+Environment="PATH=VIRT_ENVbin:SYS_PATH"
 EnvironmentFile=/usr/local/thscripts/etc/th-api.conf
 ExecStart=/usr/local/thscripts/.venv/bin/python api.py $THAPI_HOST $THAPI_PORT &> $THAPI_LOGS
 Restart=always

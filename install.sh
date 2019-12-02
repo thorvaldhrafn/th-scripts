@@ -17,8 +17,8 @@ then
 fi
 
 cp confs/th-api.service /usr/lib/systemd/system/
-VIRT_ENV="/usr/local/thscripts/.venv/"; sed -i 's|VIRT_ENV|${VIRT_ENV}|g' /usr/lib/systemd/system/th-api.service
-sed -i 's|SYS_PATH|${VIRT_ENV}bin:${PATH}|g' /usr/lib/systemd/system/th-api.service
+VIRT_ENV="/usr/local/thscripts/.venv"; sed -i "s|VIRT_ENV|${VIRT_ENV}/|g" /usr/lib/systemd/system/th-api.service
+sed -i "s|SYS_PATH|${PATH}|g" /usr/lib/systemd/system/th-api.service
 
 cp requirements.txt /usr/local/thscripts/
 su - thscripts -c "\
