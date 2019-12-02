@@ -3,7 +3,6 @@ from BaseHTTPServer import BaseHTTPRequestHandler
 import cgi
 import json
 import sys
-import subprocess
 from domain_list import result_list, serv_ip_list
 
 
