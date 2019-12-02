@@ -3,7 +3,8 @@ from BaseHTTPServer import BaseHTTPRequestHandler
 import cgi
 import json
 import sys
-from domain_list import result_list
+import subprocess
+from domain_list import result_list, serv_ip_list
 
 
 class RestHTTPRequestHandler(BaseHTTPRequestHandler):
@@ -34,7 +35,7 @@ class RestHTTPRequestHandler(BaseHTTPRequestHandler):
                 type_acc = form.getvalue("domain_list")
                 self.wfile.write(json.dumps({'data': result_list(type_acc)}))
             if k == "check":
-                self.wfile.write(json.dumps({'data': "check_answ"}))
+                self.wfile.write(json.dumps({'data': serv_ip_list()}))
         return
 
 
