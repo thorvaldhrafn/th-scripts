@@ -105,11 +105,8 @@ def check_vhost(host_list, param):
         except dns.resolver.NoAnswer:
             pass
     if param == "all":
-        all = dict()
-        all["domains"] = domains
-        all["wrong_aliases"] = wrong_aliases
-        all["aliases"] = aliases
-        return all
+        full_data = dict(domains=domains, wrong_aliases=wrong_aliases, aliases=aliases)
+        return full_data
     elif param == "domains":
         return domains
     elif param == "wrong_aliases":
