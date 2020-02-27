@@ -1,4 +1,4 @@
-from __future__ import print_function
+# from __future__ import print_function
 
 import psutil
 import re
@@ -22,11 +22,13 @@ import sys
 #         pool_conf_list.append(i)
 #
 
+
 for prinfo in psutil.process_iter():
     try:
         cmd_first = prinfo.cmdline()[0]
         if re.match('.*php-fpm: pool.+', cmd_first):
+            p_data_list = []
             pool = cmd_first.split()[-1]
-            print(pool)
+            print(prinfo.memory_full_info())
     except (psutil.NoSuchProcess, psutil.AccessDenied, IndexError):
         pass
