@@ -28,5 +28,6 @@ for prinfo in psutil.process_iter():
             print(prinfo.cmdline())
         else:
             print(prinfo)
-    except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+    except:
+    # except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
         pass
