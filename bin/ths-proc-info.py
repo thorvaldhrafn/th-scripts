@@ -26,5 +26,5 @@ for prinfo in psutil.process_iter():
     try:
         if re.match('.*php-fpm: pool.+', prinfo.cmdline()[0]):
             print(prinfo.cmdline())
-    except (psutil.NoSuchProcess, psutil.AccessDenied):
+    except (psutil.NoSuchProcess, psutil.AccessDenied, IndexError):
         pass
