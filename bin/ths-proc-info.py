@@ -22,13 +22,13 @@ import sys
 #         pool_conf_list.append(i)
 #
 
-
 for prinfo in psutil.process_iter():
     try:
         cmd_first = prinfo.cmdline()[0]
         if re.match('.*php-fpm: pool.+', cmd_first):
             p_data_list = []
             pool = cmd_first.split()[-1]
-            print(prinfo.memory_info()[0])
+            p_mem_data = dict(prinfo.memory_info()._asdict())
+            print(p_mem_data)
     except (psutil.NoSuchProcess, psutil.AccessDenied, IndexError):
         pass
