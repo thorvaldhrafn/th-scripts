@@ -24,8 +24,8 @@ import sys
 
 for prinfo in psutil.process_iter():
     try:
-        if re.match('.*php-fpm: pool.+', prinfo.name()):
-            print(prinfo.name())
+        if re.match('.*php-fpm: pool.+', prinfo.cmdline()):
+            print(prinfo.cmdline())
         else:
             print(prinfo)
     except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
