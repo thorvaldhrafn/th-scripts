@@ -29,7 +29,7 @@ for prinfo in psutil.process_iter():
             p_data_list = []
             pool = cmd_first.split()[-1]
             p_mem_data = prinfo.memory_info()
-            print(p_mem_data)
+            print(p_mem_data.rss)
             for i in p_mem_data:
                 print(i)
                 print(type(i))
