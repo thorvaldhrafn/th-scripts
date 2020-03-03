@@ -28,7 +28,7 @@ for prinfo in psutil.process_iter():
         if re.match('.*php-fpm: pool.+', cmd_first):
             p_data_list = []
             pool = cmd_first.split()[-1]
-            p_mem_data = dict(prinfo.memory_info()._asdict())
+            p_mem_data = dict(prinfo.memory_info())
             print(p_mem_data)
     except (psutil.NoSuchProcess, psutil.AccessDenied, IndexError):
         pass
