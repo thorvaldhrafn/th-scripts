@@ -30,5 +30,8 @@ for prinfo in psutil.process_iter():
             pool = cmd_first.split()[-1]
             p_mem_data = prinfo.memory_info()
             print(p_mem_data)
+            for i in p_mem_data:
+                print(i)
+                print(type(i))
     except (psutil.NoSuchProcess, psutil.AccessDenied, IndexError):
         pass
