@@ -26,7 +26,7 @@ class FullPMemInfo(object):
             p_mem_vms_new = p_mem_vms_old + p_mem_vms
             self.proc_mem_list[pname]['rss'] = p_mem_vms_new
         except KeyError:
-            vms_dict = dict(rss=p_mem_vms)
+            vms_dict = dict(vms=p_mem_vms)
             try:
                 p_dict = self.proc_mem_list[pname]
                 p_dict = {**p_dict, **vms_dict}
