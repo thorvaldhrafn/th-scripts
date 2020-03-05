@@ -24,7 +24,7 @@ class FullPMemInfo(object):
         try:
             p_mem_vms_old = self.proc_mem_list[pname]['vms']
             p_mem_vms_new = p_mem_vms_old + p_mem_vms
-            self.proc_mem_list[pname]['rss'] = p_mem_vms_new
+            self.proc_mem_list[pname]['vms'] = p_mem_vms_new
         except KeyError:
             vms_dict = dict(vms=p_mem_vms)
             try:
@@ -46,7 +46,7 @@ for prinfo in psutil.process_iter():
             p_mem_rss = p_mem_data.rss
             p_mem_vms = p_mem_data.vms
             FullPMemInfo.p_mem_rss_full(pool, p_mem_rss)
-            # FullPMemInfo.p_mem_vms_full(pool, p_mem_vms)
+            FullPMemInfo.p_mem_vms_full(pool, p_mem_vms)
     except (psutil.NoSuchProcess, psutil.AccessDenied, IndexError):
         pass
 
