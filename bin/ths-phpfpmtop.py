@@ -44,7 +44,9 @@ for prinfo in psutil.process_iter():
             pool = cmd_first.split()[-1]
             p_mem_data = prinfo.memory_info()
             p_mem_rss = p_mem_data.rss
+            p_mem_vms = p_mem_data.vms
             FullPMemInfo.p_mem_rss_full(pool, p_mem_rss)
+            FullPMemInfo.p_mem_rss_full(pool, p_mem_vms)
     except (psutil.NoSuchProcess, psutil.AccessDenied, IndexError):
         pass
 
