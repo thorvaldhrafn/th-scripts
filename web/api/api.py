@@ -29,7 +29,6 @@ class RestHTTPRequestHandler(BaseHTTPRequestHandler):
         for k in keys_list:
             if k == "domain_list":
                 type_acc = form.getvalue("domain_list")
-                print(result_list(type_acc))
                 self.wfile.write(json.dumps({'data': result_list(type_acc)}))
             if k == "check":
                 output = subprocess.Popen("echo $PATH", shell=True, stdout=subprocess.PIPE)
