@@ -71,6 +71,7 @@ def check_vhost(host_list, param):
     aliases = dict()
     wrong_aliases = list()
     domains = dict()
+    wrong_domains = dict()
     ip_list = serv_ip_list()
     for vhost in host_list:
         try:
@@ -78,15 +79,14 @@ def check_vhost(host_list, param):
                 host_ip = str(rdata)
                 if ip_list.count(host_ip):
                     domains[vhost] = host_ip
+                else:
+                    wrong_domains[vhost] = host_ip
         except dns.resolver.NXDOMAIN:
             pass
-            # print "No such domain %s" % vhost
         except dns.resolver.Timeout:
             pass
-            # print "Timed out while resolving %s" % vhost
         except dns.exception.DNSException:
             pass
-            # print "Unhandled exception"
     for vhost in domains.keys():
         try:
             for rdata in dns.resolver.query(vhost, "CNAME"):
@@ -105,7 +105,7 @@ def check_vhost(host_list, param):
         except dns.resolver.NoAnswer:
             pass
     if param == "all":
-        full_data = dict(domains=domains, wrong_aliases=wrong_aliases, aliases=aliases)
+        full_data = dict(domains=domains, wrong_aliases=wrong_aliases, aliases=aliases, wrong_domains=wrong_domains)
         return full_data
     elif param == "domains":
         return domains
@@ -113,6 +113,8 @@ def check_vhost(host_list, param):
         return wrong_aliases
     elif param == "aliases":
         return aliases
+    elif param == "wrong_domains":
+        return wrong_domains
 
 
 def result_list(type_list="all", conf_path="/etc/nginx/nginx.conf"):
