@@ -22,7 +22,7 @@ dir_list="bin etc web"
 
 for i in $dir_list; do
   mkdir /usr/local/thscripts/"${i}"
-  rsync -aq --delete "${i}"/ /usr/local/thscripts/"${i}"/
+  rsync -aq --delete --exclude=/usr/local/thscripts/etc/global.config "${i}"/ /usr/local/thscripts/"${i}"/
 done
 
 if [[ $install_param == "install" ]]; then
