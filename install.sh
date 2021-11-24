@@ -41,12 +41,12 @@ if [[ $install_param == "install" ]]; then
   systemctl enable th-api.service
 fi
 
-if [[ ${systemctl is-active --quiet th-api.service} ]]
+if [[ $(systemctl is-active --quiet th-api.service) ]]
 then
     systemctl restart th-api.service
 fi
 
-if [[ -d /etc/nginx/ && ${systemctl is-active --quiet nginx} ]]
+if [[ -d /etc/nginx/ && $(systemctl is-active --quiet nginx) ]]
 then
     systemctl reload nginx
 fi
