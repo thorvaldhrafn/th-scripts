@@ -9,9 +9,10 @@ else
   exit 1
 fi
 
+mkdir /usr/local/thscripts/
+useradd -s /bin/bash -d /usr/local/thscripts/ -m thscripts
+
 if [[ $install_param == "install" ]]; then
-  mkdir /usr/local/thscripts/
-  useradd -s /bin/bash -d /usr/local/thscripts/ -m thscripts
   if [[ -d /etc/nginx/ ]]; then
     cp confs/nginx_thscripts.conf /etc/nginx/conf.d/thscripts.conf
   fi
@@ -24,16 +25,17 @@ for i in $dir_list; do
   rsync -aq --delete --exclude=/usr/local/thscripts/etc/global.config "${i}"/ /usr/local/thscripts/"${i}"/
 done
 
-find /usr/local/thscripts/ -maxdepth 1 -mindepth 1 -type d | while read -r line; do
-  checkr="delete"
-  for j in $dir_list; do
-    if [[ $line == "/usr/local/thscripts/${j}/" ]]; then
-      checkr="not_delete"
-    fi
-  done
-  if [[ $checkr == "delete" ]]; then
-    rm -r "$line"
-  fi
+find /usr/local/thscripts/ -maxdepth 1 -mindepth 1 -type d -print0 | while read -r line; do
+  echo $line
+#  checkr="delete"
+#  for j in $dir_list; do
+#    if [[ $line == "/usr/local/thscripts/${j}/" ]]; then
+#      checkr="not_delete"
+#    fi
+#  done
+#  if [[ $checkr == "delete" ]]; then
+#    rm -r "$line"
+#  fi
 done
 
 if [[ ! -d /usr/local/thscripts/.venv/ ]]; then
