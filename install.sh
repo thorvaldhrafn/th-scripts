@@ -9,6 +9,10 @@ else
   exit 1
 fi
 
+if [[ $(virtualenv  --version >/dev/null 2>&1; echo $?) -ne 0 ]]; then
+  exit 1
+fi
+
 mkdir /usr/local/thscripts/ 2>/dev/null
 useradd -s /bin/bash -d /usr/local/thscripts/ -m thscripts
 
@@ -27,15 +31,15 @@ done
 
 find /usr/local/thscripts/ -maxdepth 1 -mindepth 1 -type d -print0 | while read -r line; do
   echo $line
-#  checkr="delete"
-#  for j in $dir_list; do
-#    if [[ $line == "/usr/local/thscripts/${j}/" ]]; then
-#      checkr="not_delete"
-#    fi
-#  done
-#  if [[ $checkr == "delete" ]]; then
-#    rm -r "$line"
-#  fi
+  checkr="delete"
+  for j in $dir_list; do
+    if [[ $line == "/usr/local/thscripts/${j}/" ]]; then
+      checkr="not_delete"
+    fi
+  done
+  if [[ $checkr == "delete" ]]; then
+    rm -r "$line"
+  fi
 done
 
 if [[ ! -d /usr/local/thscripts/.venv/ ]]; then
