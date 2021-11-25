@@ -31,7 +31,7 @@ dir_list="bin etc web"
 
 dir_list_full="$dir_list .venv"
 
-find /usr/local/thscripts/ -maxdepth 1 -mindepth 1 -type d -print0 | while read -r line; do
+find /usr/local/thscripts/ -maxdepth 1 -mindepth 1 -type d | while read -r line; do
   echo "$line"
 #  checkr="delete"
 #  for j in $dir_list_full; do
