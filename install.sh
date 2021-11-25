@@ -9,7 +9,7 @@ else
   exit 1
 fi
 
-mkdir /usr/local/thscripts/
+mkdir /usr/local/thscripts/ 2>/dev/null
 useradd -s /bin/bash -d /usr/local/thscripts/ -m thscripts
 
 if [[ $install_param == "install" ]]; then
@@ -21,7 +21,7 @@ fi
 dir_list="bin etc web"
 
 for i in $dir_list; do
-  mkdir /usr/local/thscripts/"${i}"
+  mkdir /usr/local/thscripts/"${i}" 2>/dev/null
   rsync -aq --delete --exclude=/usr/local/thscripts/etc/global.config "${i}"/ /usr/local/thscripts/"${i}"/
 done
 
