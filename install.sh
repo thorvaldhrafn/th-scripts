@@ -24,7 +24,7 @@ for i in $dir_list; do
   rsync -aq --delete --exclude=/usr/local/thscripts/etc/global.config "${i}"/ /usr/local/thscripts/"${i}"/
 done
 
-find /usr/local/thscripts/ -maxdepth 1 -mindepth 1 -type d; while read -r line; do
+find /usr/local/thscripts/ -maxdepth 1 -mindepth 1 -type d -print0 | while read -r line; do
   checkr="delete"
   for j in $dir_list; do
     if [[ $line == "/usr/local/thscripts/${j}/" ]]; then
