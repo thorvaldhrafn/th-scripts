@@ -42,6 +42,8 @@ if [[ ! -d /usr/local/thscripts/.venv/ ]]; then
     update_param="venv_update"
 fi
 
+echo $update_param
+
 if [[ $install_param == "install" || $update_param == "venv_update" ]]; then
   cp confs/th-api.service /usr/lib/systemd/system/
   chown -R thscripts:thscripts /usr/local/thscripts/
