@@ -33,15 +33,15 @@ dir_list_full="$dir_list .venv"
 
 find /usr/local/thscripts/ -maxdepth 1 -mindepth 1 -type d | while read -r line; do
   echo "$line"
-#  checkr="delete"
-#  for j in $dir_list_full; do
-#    if [[ $line == "/usr/local/thscripts/${j}/" ]]; then
-#      checkr="not_delete"
-#    fi
-#  done
-#  if [[ $checkr == "delete" ]]; then
-#    rm -r "$line"
-#  fi
+  checkr="delete"
+  for j in $dir_list_full; do
+    if [[ $line == "/usr/local/thscripts/${j}" ]]; then
+      checkr="not_delete"
+    fi
+  done
+  if [[ $checkr == "delete" ]]; then
+    rm -r "$line"
+  fi
 done
 
 #if [[ ! -d /usr/local/thscripts/.venv/ ]]; then
