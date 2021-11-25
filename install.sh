@@ -15,7 +15,6 @@ if [[ $install_param == "install" ]]; then
   if [[ -d /etc/nginx/ ]]; then
     cp confs/nginx_thscripts.conf /etc/nginx/conf.d/thscripts.conf
   fi
-  cp confs/th-api.service /usr/lib/systemd/system/
 fi
 
 dir_list="bin etc web"
@@ -25,7 +24,25 @@ for i in $dir_list; do
   rsync -aq --delete --exclude=/usr/local/thscripts/etc/global.config "${i}"/ /usr/local/thscripts/"${i}"/
 done
 
-if [[ $install_param == "install" ]]; then
+while find /usr/local/thscripts/ -maxdepth 1 -mindepth 1 type -d; read -r line; do
+  checkr="delete"
+  for j in $dir_list; do
+    if [[ $line == "/usr/local/thscripts/${j}/" ]]; then
+      checkr="not_delete"
+    fi
+  done
+  if [[ $checkr == "delete" ]]; then
+    rm -r "$line"
+  fi
+done
+
+if [[ ! -d /usr/local/thscripts/.venv/ ]]; then
+    update_param="venv_update"
+fi
+
+if [[ $install_param == "install" || $update_param == "venv_update" ]]; then
+  cp confs/th-api.service /usr/lib/systemd/system/
+  chown -R thscripts:thscripts /usr/local/thscripts/
   VIRT_ENV="/usr/local/thscripts/.venv/"; sed -i "s|VIRT_ENV|${VIRT_ENV}|g" /usr/lib/systemd/system/th-api.service
   sed -i "s|SYS_PATH|${PATH}|g" /usr/lib/systemd/system/th-api.service
 
@@ -42,9 +59,17 @@ if [[ $install_param == "install" ]]; then
   systemctl start th-api.service
 fi
 
+if [[ $install_param == "update" && $update_param != "venv_update" ]]; then
+  cp requirements.txt /usr/local/thscripts/
+  su - thscripts -c "\
+  source /usr/local/thscripts/.venv/bin/activate && \
+  pip install -r requirements.txt && \
+  deactivate"
+  rm /usr/local/thscripts/requirements.txt
+fi
+
 systemctl is-active --quiet th-api.service && systemctl restart th-api.service
 
-if [[ -d /etc/nginx/ ]]
-then
+if [[ -d /etc/nginx/ ]]; then
     systemctl is-active --quiet nginx && systemctl reload nginx
 fi
