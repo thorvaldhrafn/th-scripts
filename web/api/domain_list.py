@@ -80,6 +80,7 @@ def check_vhost(host_list, param):
             for rdata in google_resolver.query(vhost, "A"):
                 host_ip = str(rdata)
                 print(vhost, host_ip)
+                print(ip_list)
                 if ip_list.count(host_ip):
                     domains[vhost] = host_ip
                 else:
